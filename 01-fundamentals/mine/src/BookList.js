@@ -1,46 +1,14 @@
 import React from 'react'
  
 import './index.css';
+import { books } from './books';
 
-const books =[
-  {
-    author :"Evan Stanley",
-    title : "Sonic The Hedgehog (2018-) #46",
-    img : "https://m.media-amazon.com/images/I/51HkeecClwL._SY445_SX342_PQ26_.jpg",
-    id: 1
-  },
-  {
-    author :"Evan Stanley",
-    title : "Sonic the Hedgehog: Imposter Syndrome #1 (of 4)",
-    img : "https://m.media-amazon.com/images/I/91tV6oUj89L._SY466_.jpg",
-    id: 2,
-  }
-]
-
-
-const EventEx = () =>{
-  const handleFormInput = (e) =>{
-    console.log(e);
-  }
-  const handleButtonClick = () =>{
-    alert("test");
-  }
-
-  return(
-    <section>
-      <form>
-        <h2>Form</h2>
-        <input type="text" name="example" onChange={handleFormInput}  style={{margin: "1rem 0"}} />
-      </form>
-      <button onClick={handleButtonClick} >click me</button>
-    </section>
-  )
-}
 
 const Book = (props) => {
-  const {img, title, author} = props;
+  const {img, title, author,value} = props;
   return(
     <article className="book">
+      <span className='number' >#{value+1}</span>
       <img src={img} alt=""/>
       <h4>{author}</h4>
       <h2>{title}</h2>
@@ -48,26 +16,22 @@ const Book = (props) => {
   )
 }
 
-const books_map = books.map((book)=>{
+const books_map = books.map((book, index)=>{
   return(
-    <Book {...book} key={book.id}/>
+    <Book {...book} key={book.id} value = {index} />
   )
 });
  
-
 const BookList = () => {
+  
   return (
     <>
-        <section className="booklist">
-          <EventEx/>
-          {books_map}
-        </section>;
+      <h1>Amazon Best Sellers</h1>
+      <section className="booklist">
+        {books_map}
+      </section>;
     </>
   )
 }
-
-
-
-
 
 export default BookList
